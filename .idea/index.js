@@ -53,3 +53,50 @@ yourpromise
     .then((result)=>{
         console.log("vysledek" + result)
 });
+
+fetch("https://jsonplaceholder.typicode.com/users/1")
+    .then((response) => {
+        if (!response.ok) {
+            throw new Error(`Response status: ${response.status}`);
+        }
+        return response.json();
+
+    })
+    .then((data) => {
+        //console.log(result);
+        console.log(data.name)
+    })
+    .catch((error) => {
+        console.error(error.message);
+    });
+
+
+//*************************************************4********************************************************************
+fetch("https://jsonplaceholder.typicode.com/users/1")
+    .then((response) => {
+        if (!response.ok) {
+            throw new Error(`Response status: ${response.status}`);
+        }
+        return response.json();
+    })
+    .then((user) => {
+        const url = `https://jsonplaceholder.typicode.com/posts?userId=${user.id}`;
+        return fetch(url);
+    })
+    .then((response) => {
+        if (!response.ok) {
+            throw new Error(`Response status: ${response.status}`);
+        }
+        return response.json();
+    })
+    .then((posts) => {
+        console.log(posts.length);
+    })
+    .catch((error) => {
+        console.error(error.message);
+    });
+
+
+
+
+
